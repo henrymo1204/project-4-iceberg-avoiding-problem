@@ -58,14 +58,14 @@ unsigned int iceberg_avoiding_exhaustive(const grid& setting) {
     }
     int row = 0;
     int column = 0;
-    bool vertify = true;
+    bool verify = true;
     for(int k = 1; k < count; k++){
       if(candidate[k] == 'l'){
         if(setting.may_step(row, column+1) == true){
           column++;
         }
         else{
-          vertify = false;
+          verify = false;
           break;
         }
       }
@@ -74,12 +74,12 @@ unsigned int iceberg_avoiding_exhaustive(const grid& setting) {
           row++;
         }
         else{
-          vertify = false;
+          verify = false;
           break;
         }
       }
     }
-    if(vertify == true){
+    if(verify == true){
       count_paths++;
     }
     count = 0;
