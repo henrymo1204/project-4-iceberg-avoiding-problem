@@ -40,49 +40,31 @@ unsigned int iceberg_avoiding_exhaustive(const grid& setting) {
 
   // TODO: implement the exhaustive optimization algorithm, then delete this
   // comment.
-  char candidate [steps];
-  int count = 0;
   int bit;
   for(int i = 0; i <= pow(2.0, steps) - 1; i++){
-    candidate[count] = 's';
-    count++;
+    path candidate(setting);
     for(unsigned int j = 0; j <= steps - 1; j++){
       bit = (i >> j) & 1;
       if(bit == 1){
-        candidate[count] = 'r';
+        if(candidate.is_step_valid(STEP_DIRECTION_RIGHT)){
+          candidate.add_step(STEP_DIRECTION_RIGHT);
+        }
+        else{
+          break;
+        }
       }
       else{
-        candidate[count] = 'd';
-      }
-      count++;
-    }
-    int row = 0;
-    int column = 0;
-    bool verify = true;
-    for(int k = 1; k < count; k++){
-      if(candidate[k] == 'r'){
-        if(setting.may_step(row, column+1) == true){
-          column++;
+        if(candidate.is_step_valid(STEP_DIRECTION_DOWN)){
+          candidate.add_step(STEP_DIRECTION_DOWN);
         }
         else{
-          verify = false;
-          break;
-        }
-      }
-      else if(candidate[k] == 'd'){
-        if(setting.may_step(row+1, column) == true){
-          row++;
-        }
-        else{
-          verify = false;
           break;
         }
       }
     }
-    if(verify == true){
+    if(candidate.final_row() == setting.rows() - 1 && candidate.final_column() == setting.columns() - 1){
       count_paths++;
     }
-    count = 0;
   }
 
   return count_paths;
