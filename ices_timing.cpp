@@ -23,7 +23,7 @@ int main() {
 
   const size_t EXHAUSTIVE_OPTIM_MAX_N = 30;
 
-  const size_t n = 15;
+  const size_t n = 16;
 
   assert(n > 0);
 
