@@ -49,7 +49,7 @@ unsigned int iceberg_avoiding_exhaustive(const grid& setting) {
     for(unsigned int j = 0; j <= steps - 1; j++){
       bit = (i >> j) & 1;
       if(bit == 1){
-        candidate[count] = 'l';
+        candidate[count] = 'r';
       }
       else{
         candidate[count] = 'd';
@@ -60,7 +60,7 @@ unsigned int iceberg_avoiding_exhaustive(const grid& setting) {
     int column = 0;
     bool verify = true;
     for(int k = 1; k < count; k++){
-      if(candidate[k] == 'l'){
+      if(candidate[k] == 'r'){
         if(setting.may_step(row, column+1) == true){
           column++;
         }
